@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oscillator with Pitch Control</title>
+</head>
+<body>
+    <h1>Oscillator with Pitch Control</h1>
+    <label for="pitch">Pitch:</label>
+    <input type="range" id="pitch" min="20" max="2000" value="440" step="1">
+
+    <script>
+        const pitchControl = document.getElementById('pitch');
+        
+        pitchControl.addEventListener('input', () => {
+            const frequency = parseFloat(pitchControl.value);
+            fetch('/setFrequency', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ frequency }),
+            });
+        });
+    </script>
+</body>
+</html>
